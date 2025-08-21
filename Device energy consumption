@@ -1,0 +1,53 @@
+
+abstract class Device {
+    private String name;
+    private double powerRating; // in watts
+
+    public Device(String name, double powerRating) {
+        this.name = name;
+        this.powerRating = powerRating;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPowerRating() {
+        return powerRating;
+    }
+
+    
+    public abstract double calculateEnergyConsumption(double hours);
+class Laptop extends Device {
+    public Laptop(String name, double powerRating) {
+        super(name, powerRating);
+    }
+
+    @Override
+    public double calculateEnergyConsumption(double hours) {
+        return (getPowerRating() * hours) 
+class Refrigerator extends Device {
+    public Refrigerator(String name, double powerRating) {
+        super(name, powerRating);
+    }
+
+    @Override
+    public double calculateEnergyConsumption(double hours) {
+        // Assume refrigerator runs at 70% efficiency
+        return (getPowerRating() * 0.7 * hours) / 1000.0;
+    }
+}
+
+
+public class EnergySimulator {
+    public static void main(String[] args) {
+        Device laptop = new Laptop("Dell XPS", 65); // 65 watts
+        Device fridge = new Refrigerator("LG Fridge", 150); // 150 watts
+
+        double usageHours = 5;
+
+        System.out.println("Energy Consumption Simulation:");
+        System.out.printf("%s: %.2f kWh%n", laptop.getName(), laptop.calculateEnergyConsumption(usageHours));
+        System.out.printf("%s: %.2f kWh%n", fridge.getName(), fridge.calculateEnergyConsumption(usageHours));
+    }
+}
