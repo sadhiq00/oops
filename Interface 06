@@ -1,0 +1,51 @@
+// Interface
+interface BankOperations {
+    void deposit(double amount);
+    void withdraw(double amount);
+    void showBalance();
+}
+
+// Class implementing the interface
+class Account implements BankOperations {
+    private String accountHolder;
+    private double balance;
+
+    // Constructor
+    Account(String accountHolder, double balance) {
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    // Implementing interface methods
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println(amount + " deposited. Updated Balance: " + balance);
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn. Updated Balance: " + balance);
+        } else {
+            System.out.println("Insufficient balance!");
+        }
+    }
+
+    public void showBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+// Another class for Transaction
+class Transaction {
+    public static void main(String[] args) {
+        // Create an account object
+        Account acc = new Account("John Doe", 5000);
+
+        // Perform banking operations
+        acc.showBalance();
+        acc.deposit(1500);
+        acc.withdraw(2000);
+        acc.withdraw(6000); // Example of insufficient balance
+    }
+}
